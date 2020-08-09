@@ -1,0 +1,60 @@
+spring:
+  application:
+    name: ad-eureka
+
+server:
+  port: 8090
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    fetch-registry: false #单节点，不需要同步其他eureka
+    #eureka.client.register-with-eureka: 表示是否将自己注册到 Eureka Server, 默认为true。由于当前应用就是 Eureka Server, 因此设为 false
+    register-with-eureka: false #禁止注册自己
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+
+# 后面的先不用，暂时的演示用不着高可用
+---
+spring:
+  application:
+    name: ad-eureka
+  profiles: server1
+server:
+  port: 8090
+eureka:
+  instance:
+    hostname: server1
+    prefer-ip-address: false
+  client:
+    service-url:
+      defaultZone: http://server2:8091/eureka/,http://server3:8092/eureka/
+---
+spring:
+  application:
+    name: ad-eureka
+  profiles: server2
+server:
+  port: 8091
+eureka:
+  instance:
+    hostname: server2
+    prefer-ip-address: false
+  client:
+    service-url:
+      defaultZone: http://server1:8090/eureka/,http://server3:8092/eureka/
+---
+spring:
+  application:
+    name: ad-eureka
+  profiles: server3
+server:
+  port: 8092
+eureka:
+  instance:
+    hostname: server3
+    prefer-ip-address: false
+  client:
+    service-url:
+      defaultZone: http://server1:8090/eureka/,http://server2:8091/eureka/

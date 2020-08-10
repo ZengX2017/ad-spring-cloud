@@ -8,14 +8,14 @@ eureka:
     service-url:
       defaultZone: http://server1:8090/eureka/
 
-#zuul:
-#  prefix: /imooc
-#  routes:
-#    sponsor:
-#      path: /ad-sponsor/**
-#      serviceId: eureka-client-ad-sponsor
-#      strip-prefix: false
-#    search:
-#      path: /ad-search/**
-#      serviceId: eureka-client-ad-search
-#      strip-prefix: false
+zuul:
+  prefix: /adward
+  routes:
+    sponsor:
+      path: /ad-sponsor/**
+      serviceId: eureka-client-ad-sponsor
+      strip-prefix: false
+    search:
+      path: /ad-search/**
+      serviceId: eureka-client-ad-search
+      strip-prefix: false

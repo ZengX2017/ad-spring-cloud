@@ -1,0 +1,21 @@
+package com.adward.ad.dump.table;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * @author Adward_Z
+ * @date 2020/8/12
+ */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class AdUnitTable {
+
+    private Long unitId;
+    private Integer unitStatus;
+    private Integer positionType;
+
+    private Long planId;
+}
